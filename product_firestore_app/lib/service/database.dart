@@ -27,8 +27,8 @@ class Database {
     }
   }
 
-  Future<void> deleteProduct({required ProductModel product}) async {
-    var reference = FirebaseFirestore.instance.doc('products/${product.id}');
+   Future<void> deleteProduct({required ProductModel product}) async{
+    var reference = FirebaseFirestore.instance.doc('product/${product.id}');
     try {
       await reference.delete();
     } catch (e) {

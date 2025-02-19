@@ -5,7 +5,7 @@ import 'package:product_firestore_app/service/Database.dart';
 // ignore: must_be_immutable
 class ProductForm extends StatefulWidget {
   ProductModel? product;
-  ProductForm({super.key});
+  ProductForm({super.key, this.product});
 
   @override
   State<ProductForm> createState() => _ProductFormState();

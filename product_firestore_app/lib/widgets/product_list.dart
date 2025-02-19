@@ -8,35 +8,37 @@ class ProductList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    Database db = Database.myInstance;
-    var myStream = db.getAllProductStream();
-
+   Database db = Database.myInstance;
+    var myStream = db.getAllProductStream();    
+    
+    
     return Container(
-      padding:  const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.only(top: 10),
       child: StreamBuilder(
         stream: myStream, 
-        builder: (context,snapshot){
+        builder: (context, snapshot){
           if(snapshot.data!.isEmpty){
             return const Center(child: Text('ยังไม่มีข้อมูลสินค้า'),);
           }else if(snapshot.hasData){
             return ListView.builder(
               itemCount: snapshot.data!.length,
-              itemBuilder: (context,index){
+              itemBuilder: (context, index){
                 return Dismissible(
-                  key:UniqueKey(), 
-                  onDismissed: (direction) {
-                    if(direction == DismissDirection.endToStart){
-                      db.deleteProduct(product: snapshot.data![index]);
-                    }
-                  },
-                  child: ProductItem(product: snapshot.data![index])
-                );
-              }
-            );
+                key: UniqueKey(),
+                onDismissed: (direction) {
+                  if(direction == DismissDirection.endToStart){
+                    db.deleteProduct(product: snapshot.data![index]);
+                  }
+                },
+                direction: DismissDirection.endToStart,
+                background:  Container(color: Colors.red,),
+                child: ProductItem(product: snapshot.data![index],)
+              );
+            });
           }
-          return const Center(child: CircularProgressIndicator(),);
-        }
-      ),
+          return const Center(child:  CircularProgressIndicator(),);
+        }),
+      
     );
   }
 }

@@ -5,7 +5,7 @@ import 'package:product_firestore_app/widgets/product_form.dart';
 // ignore: must_be_immutable
 class ProductPopup extends StatelessWidget {
   ProductModel? product;
-  ProductPopup(ProductModel product, {super.key, required ProductModel product});
+  ProductPopup({super.key, this.product});
 
   @override
   Widget build(BuildContext context) {
